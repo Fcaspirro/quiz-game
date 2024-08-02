@@ -1,0 +1,12 @@
+# Node modules
+node_modules
+
+# Environment files
+.env
+
+# Compiled output
+dist/
+build/
+
+# IDEs and editors
+.vscode/

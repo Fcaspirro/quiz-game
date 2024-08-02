@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+       
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/src/css/styles.css">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+        <title>Quiz Game</title>
+    </head>
+
+    <body>
+        <div class="page-container">
+            <main>
+                <h1>Quiz Game</h1>
+                <h3 id="pergunta"></h3>
+                <div id="perguntas-container"></div>
+                <div class="loader-container" id="loader">
+                    <div class="loader"></div>
+                    <div id="status"></div>
+                </div> 
+                <div class="btns">
+                    <a href="#resultadoModal" id="verificarResultado" class="btn" style="display:none;" rel="modal:open">Verificar Resultado Final</a> 
+                    <button type="button" style="display:none;" class="btn reiniciarQuiz">Reiniciar Quiz</button>
+                </div>
+            </main>
+                
+            <div id="resultadoModal" class="modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Resultado do Quiz</h3>
+                            <a href="#" rel="modal:close"></a>
+                        </div>
+                        <div class="modal-body" id="resultadoBody">
+                            <!-- Resultado do quiz será exibido aqui -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn reiniciarQuiz">Reiniciar Quiz</button>
+                            <div class="wrapper-pontuacao">
+                                <div class="wrapper-acertos">
+                                    <p><b style="color: #a3e635;">%</b> de acertos</p>
+                                    <span id="porcentagem-acertos"></span>
+                                </div>
+                                <div class="pontuacao-estrelas">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div id="contador-acertos">
+                <p>Acertos: 
+                    <span id="acertos">0</span> 
+                    de 
+                    <span id="total-perguntas">6</span>
+                </p>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script type="module" src="/src/js/index.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        
+
+    </body>
+
+</html>
+

@@ -45,6 +45,7 @@ O game trata-se de um quiz com o genêro de filmes, com o total de 6 perguntas d
 - **Análise Detalhada:** Ao final do quiz, os usuários recebem uma visão detalhada de suas respostas, incluindo acertos e erros, para ajudar na revisão e aprendizado.
 - **Feedback Imediato:** O resultado parcial é exibido em tempo real, garantindo que os usuários recebam feedback sobre seu desempenho conforme respondem às perguntas.
 - **Loading Inicial:** Um loading inicial é exibido durante o processo de requisição das APIs, garantindo que o usuário saiba que a aplicação está carregando e processando os dados.
+- **Tratamento de erros:** Durante o processo de requisição das APIs, caso haja algum erro durante a requisição, a aplicação para e o usuário recebe a informação do erro como status.
 - **Pontuação Gamificada:** O sistema de pontuação com estrelas e porcentagem oferece uma forma divertida e motivacional de visualizar o desempenho.
 - **Responsividade:** game quiz totalmente otimizado para funcionar em diferentes dispositivos e tamanhos de tela.
 - **Reinício fácil:** os usuários podem reiniciar o quiz rapidamente para tentar novamente ou praticar mais.

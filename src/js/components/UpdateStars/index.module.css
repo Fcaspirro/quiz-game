@@ -1,0 +1,47 @@
+.wrapper-pontuacao {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.wrapper-acertos {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.wrapper-acertos p, .wrapper-acertos span {
+  font-size: 1.4rem;
+}
+
+.pontuacao-estrelas {
+  display: flex;
+}
+
+img.estrela.aparecer-estrela {
+  width: 20px;
+}
+
+@keyframes aparecerEstrela {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+#resultadoModal button.btn.reiniciarQuiz,
+.wrapper-acertos,
+.pontuacao-estrelas img
+{
+  animation: aparecerEstrela 0.5s ease-in-out forwards;
+}
+
+@media (max-width: 728px) {
+  .wrapper-pontuacao {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: space-evenly;
+  }
+}

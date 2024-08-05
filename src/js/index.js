@@ -1,138 +1,14 @@
-const apiKey = import.meta.env.VITE_FAST_TRANSLATE_API_KEY; //abra o arquivo '.env.sample' e renomeie-o para '.env' e insira sua API em 'SUA_API_AQUI'.
+import { shuffle } from './components/ShuffleQuestionsAndAnswers/index.module';
+import { pegarPerguntas } from './components/ConsultQuiz/index.module';
+import { traduzirTexto } from './components/TranslateQuiz/index.module';
+import { atualizarEstrelas } from './components/UpdateStars/index.module';
+import { atualizarStatus } from './components/UpdateStatus/index.module';
 
 $(function() {
     let contadorAcertos = 0;
     let totalPerguntas = 6;
-    let traducoesPendentes = 0;
-
     let perguntasComRespostas = {};
     let respostasEscolhidas = [];
-
-    function shuffle(array) {
-        let counter = array.length;
-
-        while (counter > 0) {
-            let index = Math.floor(Math.random() * counter);
-            counter--;
-            let temp = array[counter];
-            array[counter] = array[index];
-            array[index] = temp;
-        }
-
-        return array;
-    }
-
-    function atualizarStatus(mensagem, estagio) {
-        $('#status').html(`<strong>${estagio}</strong> ${mensagem}`).css('font-size', '1.6rem');
-    }
-
-    function pegar_perguntas(callback) {
-        $('#loader').show();
-        atualizarStatus("Buscando perguntas e respostas", "Aguardando resposta da API");
-    
-        $.ajax({
-            url: "https://opentdb.com/api.php?amount=3&category=11&type=multiple", // Alterar URL para testar diferentes códigos
-            type: "GET",
-            dataType: "json",
-            success: function (data) {
-                if (data.response_code === 0) {
-                    // Código 0: Sucesso
-                    callback(data.results);
-                } else {
-                    // Lidar com códigos de erro específicos
-                    let mensagemErro = '';
-                    switch (data.response_code) {
-                        case 1:
-                            mensagemErro = "Não foram encontrados resultados. A API não possui perguntas suficientes para sua consulta.";
-                            break;
-                        case 2:
-                            mensagemErro = "Parâmetro inválido. Argumentos passados não são válidos.";
-                            break;
-                        case 3:
-                            mensagemErro = "Token não encontrado. O token da sessão não existe.";
-                            break;
-                        case 4:
-                            mensagemErro = "Token vazio. O token da sessão retornou todas as perguntas possíveis para a consulta. É necessário redefinir o token.";
-                            break;
-                        case 5:
-                            mensagemErro = "Limite de taxa excedido. Muitas requisições foram feitas. Cada IP só pode acessar a API uma vez a cada 5 segundos.";
-                            break;
-                        default:
-                            mensagemErro = "Erro desconhecido. Verifique a documentação da API.";
-                            break;
-                    }
-                    atualizarStatus(mensagemErro, "Erro na requisição");
-                }
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                atualizarStatus("Houve um erro inesperado. Por favor, tente novamente mais tarde!", "Erro inesperado");
-                console.log("Erro na requisição:", jqXHR, textStatus, errorThrown);
-            }
-        });
-    }
-    
-
-    let erroOcorrido = false; // Variável para rastrear se ocorreu algum erro
-
-    function traduzirTexto(texto, callback, estagio) {
-        traducoesPendentes++;
-        atualizarStatus(estagio, "Traduzindo texto");
-
-        const settings = {
-            async: true,
-            crossDomain: true,
-            url: 'https://fast-translate-api1.p.rapidapi.com/translate',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-rapidapi-key': apiKey,
-                'x-rapidapi-host': 'fast-translate-api1.p.rapidapi.com',
-            },
-            processData: false,
-            data: JSON.stringify({
-                "from_lang": "en",
-                "to_lang": "pt",
-                "text": texto
-            })
-        };
-
-        $.ajax(settings)
-            .done(function (response) {
-                if (response.result) {
-                    const textoTraduzido = response.result.replace(/"/g, "'");
-                    callback(textoTraduzido);
-                } else {
-                    console.error("Erro na tradução: Resposta inválida");
-                    atualizarStatus("Erro na tradução: Resposta inválida", "Erro");
-                    erroOcorrido = true; 
-                }
-            })
-            .fail(function (jqXHR, textStatus, errorThrown) {
-                let mensagemErro = "Erro na tradução: ";
-                if (jqXHR.status === 429) {
-                    mensagemErro = "Limite de requisições excedido. Por favor, tente novamente mais tarde!";
-                } else if (jqXHR.status === 404) {
-                    mensagemErro = "A URL solicitada não foi encontrada. Por favor, tente novamente mais tarde!";
-                } else {
-                    mensagemErro = "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde!";
-                }
-                console.error(mensagemErro, jqXHR, textStatus, errorThrown);
-                atualizarStatus(mensagemErro, "Erro");
-                erroOcorrido = true; 
-            })
-            .always(function () {
-                traducoesPendentes--;
-                if (traducoesPendentes === 0) {
-                    if (!erroOcorrido) {
-                        $('#loader').hide();
-                    }
-                    erroOcorrido = false;
-                }
-            });
-    }
-
-    
-    
 
     function iniciarQuiz(perguntas) {
         atualizarStatus("Buscando perguntas e respostas..", "Iniciando Quiz..");
@@ -198,38 +74,6 @@ $(function() {
             }, "Traduzindo pergunta para pt-BR..");
         });
 
-        // Função para gerar pontuação das estrelas
-        function atualizarEstrelas(pontuacao) {
-            const estrelas = $('.pontuacao-estrelas img');
-            const estrelaCheia = 'assets/svg/star-fill.svg';
-            const estrelaMetade = 'assets/svg/star-half.svg';
-            const estrelaVazia = 'assets/svg/star-outline.svg';
-            const totalEstrelas = estrelas.length;
-            const pontuacaoPorEstrela = 100 / totalEstrelas;
-    
-            estrelas.removeClass('aparecer-estrela');
-    
-            for (let i = 0; i < totalEstrelas; i++) {
-                let limiteInferior = pontuacaoPorEstrela * i;
-                let limiteSuperior = pontuacaoPorEstrela * (i + 1);
-                let percentualEstrela = (pontuacao - limiteInferior) / pontuacaoPorEstrela;
-    
-                if (pontuacao >= limiteSuperior) {
-                    estrelas.eq(i).attr('src', estrelaCheia);
-                } else if (percentualEstrela >= 0.75) {
-                    estrelas.eq(i).attr('src', estrelaCheia);
-                } else if (percentualEstrela >= 0.25) {
-                    estrelas.eq(i).attr('src', estrelaMetade);
-                } else {
-                    estrelas.eq(i).attr('src', estrelaVazia);
-                }
-            }
-    
-            setTimeout(function() {
-                estrelas.addClass('aparecer-estrela');
-            }, 100);
-        }  
-
         $('#verificarResultado').on('click', function () {
             let gabaritoHtml = '';
             let pontuacao = Math.round((contadorAcertos / totalPerguntas) * 100);
@@ -272,9 +116,9 @@ $(function() {
             $('#resultadoBody').empty();
             $('.blocker').hide();
             $('#acertos').text(contadorAcertos);
-            pegar_perguntas(iniciarQuiz);
+            pegarPerguntas(iniciarQuiz);
         });
     }
 
-    pegar_perguntas(iniciarQuiz);
+    pegarPerguntas(iniciarQuiz);
 });

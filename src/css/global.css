@@ -1,0 +1,181 @@
+@import '../js/components/ConsultQuiz/index.module.css';
+@import '../js/components/UpdateStars/index.module.css';
+@import '../js/components/UpdateStatus/index.module.css';
+
+html {
+    font-size: 62.5%; 
+}
+
+body, html {
+    margin:0;
+    padding:0;
+    overflow: auto;
+    font-family: arial;
+    background-color: #334155;
+    color: #f5f5f4;
+}
+
+body p {
+    margin: 0;
+}
+
+h1,h3,h5 {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-size: 3.2rem;
+    border-bottom: 1px solid #475569;
+}
+
+h3, span, p {
+    font-size: 1.8rem;
+}
+
+h5 {
+    font-size: 1.4rem;
+}
+
+main {
+    width: 90%;
+    max-width: 1024px;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    border-radius: 4px;
+    text-align: left;
+}
+
+.btns {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+button, 
+a.btn {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background-color: #a3e635;
+    color: black;
+    font-weight: bold;
+    font-size: 1.4rem;
+    min-width: 140px;
+    max-width: 195px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+button:hover,
+a.btn:hover {
+    background-color: #84cc16;
+    transition: all 0.3s ease;
+}
+
+button:focus,
+a.btn:focus {
+    outline: 0;
+}
+
+button.btn.reiniciarQuiz {
+    width: 50%;
+    margin-bottom: 0;
+}
+
+div#contador-acertos {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #a3e635;
+    justify-content: center;
+    color: black;
+}
+
+div#contador-acertos span {
+    font-weight: bold;
+}
+
+#resultadoModal {
+    display: none;
+}
+
+h5.modal_resposta {
+    font-weight: normal;
+}
+
+div#resultadoModal {
+    background: #334155;
+    -webkit-box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+    padding: 30px;
+    max-width: 600px;
+}
+
+.modal-footer {
+    border-top: 1px solid #546070;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+div#resultadoBody {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 4px;
+    margin: 10px 0;
+    counter-reset: quiz-order;
+}
+
+::-webkit-scrollbar {
+    width: 8px; 
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #546070; 
+    border-radius: 8px; 
+}
+
+h3.modal-title {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #475569;
+}
+
+@media (max-width: 728px) {
+    .btns {
+        flex-direction: column;
+    }
+
+    .modal-footer {
+        flex-direction: column-reverse;
+    }
+
+    #resultadoBody {
+        max-height: 280px;
+    }
+
+    #resultadoBody .reiniciarQuiz {
+        display: flex;
+        margin: 0 auto;
+    }
+}

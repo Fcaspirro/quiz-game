@@ -9,7 +9,7 @@
   z-index: 9999;
 }
 
-.loader-container .loader {
+.loader-container .loader-spin {
   border: 8px solid rgba(132,204,22, 0.4);
   border-top: 8px solid #a3e635; 
   border-radius: 50%;
@@ -42,7 +42,7 @@
 }
 
 @media (max-width: 728px) {
-  .loader-container .loader {
+  .loader-container .loader-spin {
     width: 30px;
     height: 30px;
     border: 4px solid rgba(132,204,22, 0.4);

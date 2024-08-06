@@ -88,12 +88,12 @@ a.btn:focus {
     outline: 0;
 }
 
-button.btn.reiniciarQuiz {
+button.btn.restart-quiz {
     width: 50%;
     margin-bottom: 0;
 }
 
-div#contador-acertos {
+div#hit-counter {
     display: flex;
     position: fixed;
     bottom: 0;
@@ -104,19 +104,19 @@ div#contador-acertos {
     color: black;
 }
 
-div#contador-acertos span {
+div#hit-counter span {
     font-weight: bold;
 }
 
-#resultadoModal {
+#result-modal {
     display: none;
 }
 
-h5.modal_resposta {
+h5.modal_answer {
     font-weight: normal;
 }
 
-div#resultadoModal {
+div#result-modal {
     background: #334155;
     -webkit-box-shadow: 0 0 25px rgba(0,0,0,0.5);
     box-shadow: 0 0 25px rgba(0,0,0,0.5);
@@ -134,7 +134,7 @@ div#resultadoModal {
     gap: 20px;
 }
 
-div#resultadoBody {
+div#result-body {
     max-height: 300px;
     overflow-y: auto;
     padding-right: 4px;
@@ -170,11 +170,11 @@ h3.modal-title {
         flex-direction: column-reverse;
     }
 
-    #resultadoBody {
+    #result-body {
         max-height: 280px;
     }
 
-    #resultadoBody .reiniciarQuiz {
+    #result-body .restart-quiz {
         display: flex;
         margin: 0 auto;
     }

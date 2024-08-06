@@ -1,3 +1,3 @@
-export function atualizarStatus(mensagem, estagio) {
-  $('#status').html(`<strong>${estagio}</strong> ${mensagem}`).css('font-size', '1.6rem');
+export function updateStatus(message, stage) {
+  $('#status').html(`<strong>${stage}</strong> ${message}`).css('font-size', '1.6rem');
 }

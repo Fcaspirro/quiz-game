@@ -1,13 +1,13 @@
-import { atualizarStatus } from '../UpdateStatus/index.module';
+import { updateStatus } from '../UpdateStatus/index.module';
 
-let traducoesPendentes = 0;
-let erroOcorrido = false;
+let translationsPending = 0;
+let noteError = false;
 
 const apiKey = import.meta.env.VITE_FAST_TRANSLATE_API_KEY;
 
-export function traduzirTexto(texto, callback, estagio) {
-    traducoesPendentes++;
-    atualizarStatus(estagio, "Traduzindo texto");
+export function textTranslate(text, callback, stage) {
+    translationsPending++;
+    updateStatus(stage, "Traduzindo texto");
 
     const settings = {
         async: true,
@@ -23,41 +23,41 @@ export function traduzirTexto(texto, callback, estagio) {
         data: JSON.stringify({
             "from_lang": "en",
             "to_lang": "pt",
-            "text": texto
+            "text": text
         })
     };
 
     $.ajax(settings)
         .done(function (response) {
             if (response.result) {
-                const textoTraduzido = response.result.replace(/"/g, "'");
-                callback(textoTraduzido);
+                const translatedText = response.result.replace(/"/g, "'");
+                callback(translatedText);
             } else {
                 console.error("Erro na tradução: Resposta inválida");
-                atualizarStatus("Erro na tradução: Resposta inválida", "Erro");
-                erroOcorrido = true; 
+                updateStatus("Erro na tradução: Resposta inválida", "Erro");
+                noteError = true; 
             }
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-            let mensagemErro = "Erro na tradução: ";
+            let errorMessage = "Erro na tradução: ";
             if (jqXHR.status === 429) {
-                mensagemErro = "Limite de requisições excedido. Por favor, tente novamente mais tarde!";
+                errorMessage = "Limite de requisições excedido. Por favor, tente novamente mais tarde!";
             } else if (jqXHR.status === 404) {
-                mensagemErro = "A URL solicitada não foi encontrada. Por favor, tente novamente mais tarde!";
+                errorMessage = "A URL solicitada não foi encontrada. Por favor, tente novamente mais tarde!";
             } else {
-                mensagemErro = "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde!";
+                errorMessage = "Um erro inesperado ocorreu. Por favor, tente novamente mais tarde!";
             }
-            console.error(mensagemErro, jqXHR, textStatus, errorThrown);
-            atualizarStatus(mensagemErro, "Erro");
-            erroOcorrido = true; 
+            console.error(errorMessage, jqXHR, textStatus, errorThrown);
+            updateStatus(errorMessage, "Erro");
+            noteError = true; 
         })
         .always(function () {
-            traducoesPendentes--;
-            if (traducoesPendentes === 0) {
-                if (!erroOcorrido) {
+            translationsPending--;
+            if (translationsPending === 0) {
+                if (!noteError) {
                     $('#loader').hide();
                 }
-                erroOcorrido = false;
+                noteError = false;
             }
         }
     );

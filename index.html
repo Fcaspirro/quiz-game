@@ -21,41 +21,41 @@
         <div class="page-container">
             <main>
                 <h1>Quiz Game</h1>
-                <h3 id="pergunta"></h3>
-                <div id="perguntas-container"></div>
+                <h3 id="question"></h3>
+                <div id="questions-container"></div>
                 <div class="loader-container" id="loader">
-                    <div class="loader"></div>
+                    <div class="loader-spin"></div>
                     <div id="status"></div>
                 </div> 
                 <div class="btns">
-                    <a href="#resultadoModal" id="verificarResultado" class="btn" style="display:none;" rel="modal:open">Verificar Resultado Final</a> 
-                    <button type="button" style="display:none;" class="btn reiniciarQuiz">Reiniciar Quiz</button>
+                    <a href="#result-modal" id="check-result" class="btn" style="display:none;" rel="modal:open">Verificar Resultado Final</a> 
+                    <button type="button" style="display:none;" class="btn restart-quiz">Reiniciar Quiz</button>
                 </div>
             </main>
                 
-            <div id="resultadoModal" class="modal">
+            <div id="result-modal" class="modal">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3 class="modal-title">Resultado do Quiz</h3>
                             <a href="#" rel="modal:close"></a>
                         </div>
-                        <div class="modal-body" id="resultadoBody">
+                        <div class="modal-body" id="result-body">
                             <!-- Resultado do quiz será exibido aqui -->
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn reiniciarQuiz">Reiniciar Quiz</button>
-                            <div class="wrapper-pontuacao">
-                                <div class="wrapper-acertos">
+                            <button type="button" class="btn restart-quiz">Reiniciar Quiz</button>
+                            <div class="wrapper-score">
+                                <div class="wrapper-hits">
                                     <p><b style="color: #a3e635;">%</b> de acertos</p>
-                                    <span id="porcentagem-acertos"></span>
+                                    <span id="percentage-hits"></span>
                                 </div>
-                                <div class="pontuacao-estrelas">
-                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
-                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
-                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
-                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
-                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="estrela">
+                                <div class="score-stars">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="star">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="star">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="star">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="star">
+                                    <img src="assets/svg/star-outline.svg" alt="Estrela" class="star">
                                 </div>
                             </div>
                         </div>
@@ -63,11 +63,11 @@
                 </div>
             </div>
         
-            <div id="contador-acertos">
+            <div id="hit-counter">
                 <p>Acertos: 
-                    <span id="acertos">0</span> 
+                    <span id="hits">0</span> 
                     de 
-                    <span id="total-perguntas">6</span>
+                    <span id="total-questions">6</span>
                 </p>
             </div>
         </div>

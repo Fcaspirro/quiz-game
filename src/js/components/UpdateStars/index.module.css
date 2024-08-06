@@ -1,10 +1,10 @@
-.wrapper-pontuacao {
+.wrapper-score {
   display: flex;
   width: 50%;
   justify-content: space-between;
 }
 
-.wrapper-acertos {
+.wrapper-hits {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -12,32 +12,31 @@
   gap: 5px;
 }
 
-.wrapper-acertos p, .wrapper-acertos span {
+.wrapper-hits p, .wrapper-hits  span {
   font-size: 1.4rem;
 }
 
-.pontuacao-estrelas {
+.score-stars {
   display: flex;
 }
 
-img.estrela.aparecer-estrela {
+img.star.show-stars {
   width: 20px;
 }
 
-@keyframes aparecerEstrela {
+@keyframes show-stars {
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
-#resultadoModal button.btn.reiniciarQuiz,
-.wrapper-acertos,
-.pontuacao-estrelas img
-{
-  animation: aparecerEstrela 0.5s ease-in-out forwards;
+#result-modal button.btn.restart-quiz,
+.wrapper-hits,
+.score-stars img {
+  animation: show-stars 1.0s ease-in-out forwards;
 }
 
 @media (max-width: 728px) {
-  .wrapper-pontuacao {
+  .wrapper-score {
     width: 100%;
     flex-wrap: wrap;
     gap: 10px;

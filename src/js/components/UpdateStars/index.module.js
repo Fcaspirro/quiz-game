@@ -1,30 +1,30 @@
-export function atualizarEstrelas(pontuacao) {
-  const estrelas = $('.pontuacao-estrelas img');
-  const estrelaCheia = 'assets/svg/star-fill.svg';
-  const estrelaMetade = 'assets/svg/star-half.svg';
-  const estrelaVazia = 'assets/svg/star-outline.svg';
-  const totalEstrelas = estrelas.length;
-  const pontuacaoPorEstrela = 100 / totalEstrelas;
+export function updateStars(score) {
+  const stars = $('.score-stars img');
+  const fullStar = 'assets/svg/star-fill.svg';
+  const halfStar = 'assets/svg/star-half.svg';
+  const emptyStar= 'assets/svg/star-outline.svg';
+  const totalStars = stars.length;
+  const scoreForEachStar = 100 / totalStars;
 
-  estrelas.removeClass('aparecer-estrela');
+  stars.removeClass('show-stars');
 
-  for (let i = 0; i < totalEstrelas; i++) {
-    let limiteInferior = pontuacaoPorEstrela * i;
-    let limiteSuperior = pontuacaoPorEstrela * (i + 1);
-    let percentualEstrela = (pontuacao - limiteInferior) / pontuacaoPorEstrela;
+  for (let i = 0; i < totalStars; i++) {
+    let inferiorLimitScore = scoreForEachStar * i;
+    let upperLimitScore = scoreForEachStar * (i + 1);
+    let percentageStar = (score - inferiorLimitScore) / scoreForEachStar;
 
-    if (pontuacao >= limiteSuperior) {
-      estrelas.eq(i).attr('src', estrelaCheia);
-    } else if (percentualEstrela >= 0.75) {
-      estrelas.eq(i).attr('src', estrelaCheia);
-    } else if (percentualEstrela >= 0.25) {
-      estrelas.eq(i).attr('src', estrelaMetade);
+    if (score >= upperLimitScore) {
+      stars.eq(i).attr('src', fullStar);
+    } else if (percentageStar >= 0.75) {
+      stars.eq(i).attr('src', fullStar);
+    } else if (percentageStar >= 0.25) {
+      stars.eq(i).attr('src', halfStar);
     } else {
-      estrelas.eq(i).attr('src', estrelaVazia);
+      stars.eq(i).attr('src', emptyStar);
     }
   }
 
   setTimeout(function() {
-    estrelas.addClass('aparecer-estrela');
+    stars.addClass('show-stars');
   }, 100);
 }
